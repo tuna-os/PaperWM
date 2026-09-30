@@ -1,7 +1,7 @@
 { description = "Tiled, scrollable window management for GNOME Shell";
 
-  inputs."nixpkgs".url = github:NixOS/nixpkgs;
-  inputs."nixpkgs-gnome".url = github:vitorpavani/nixpkgs/gnome-50-bump;
+  inputs."nixpkgs".url = github:NixOS/nixpkgs/8e13ad6266acf92aa1c61d006f51a30c53d43851;
+  inputs."nixpkgs-gnome".url = github:vitorpavani/nixpkgs/7c90eaeae3a68e40a45b994a37670b5dc9c122ad;
 
   outputs = { self, nixpkgs, nixpkgs-gnome, flake-utils, ... }:
   flake-utils.lib.eachDefaultSystem
