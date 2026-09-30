@@ -43,13 +43,5 @@
     createHome = true;
     home = "/home";
     description = "PaperWM test user";
-    extraGroups = [ "wheel" ];
-    password = "paperwm";
-  };
-
-  ### No-password sudo
-  security.sudo =
-  { enable = true;
-    extraConfig = "%wheel ALL=(ALL) NOPASSWD: ALL";
   };
 }
