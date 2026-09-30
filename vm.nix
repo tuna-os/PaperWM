@@ -43,13 +43,10 @@
     createHome = true;
     home = "/home";
     description = "PaperWM test user";
-    extraGroups = [ "wheel" ];
-    password = "paperwm";
   };
 
-  ### No-password sudo
+  ### Disable sudo NOPASSWD (users can still use sudo with password if needed)
   security.sudo =
   { enable = true;
-    extraConfig = "%wheel ALL=(ALL) NOPASSWD: ALL";
   };
 }
