@@ -44,7 +44,6 @@
     home = "/home";
     description = "PaperWM test user";
     extraGroups = [ "wheel" ];
-    password = "paperwm";
   };
 
   ### No-password sudo
@@ -52,4 +51,9 @@
   { enable = true;
     extraConfig = "%wheel ALL=(ALL) NOPASSWD: ALL";
   };
+
+  # Note: This VM uses auto-login with no password. If you need to set a password
+  # for manual login, use: `nix run nixpkgs#openssl -- passwd -1`
+  # and set it with: users.users."user".hashedPassword = "<output>";
+
 }
