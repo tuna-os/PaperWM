@@ -7,12 +7,11 @@
     (lib.getBin libinput)
   ];
 
-  ### Set graphical session to auto-login GNOME
+  ### Set graphical session to GNOME (auto-login disabled for security)
   services.xserver =
   { enable = true;
     displayManager.autoLogin =
-    { enable = true;
-      user = "user";
+    { enable = false;
     };
     displayManager.gdm.enable = true;
     desktopManager.gnome.enable = true;
@@ -37,19 +36,16 @@
   #NOTE: This drops many GTK4 apps, re-enable if needed for testing.
   services.gnome.core-utilities.enable = false;
 
-  ### Set default user
+  ### Set default user (password locked for security, use 'sudo passwd user' to set test password)
   users.users."user" =
   { isNormalUser = true;
     createHome = true;
     home = "/home";
     description = "PaperWM test user";
-    extraGroups = [ "wheel" ];
-    password = "paperwm";
   };
 
-  ### No-password sudo
+  ### Sudo requires password by default
   security.sudo =
   { enable = true;
-    extraConfig = "%wheel ALL=(ALL) NOPASSWD: ALL";
   };
 }
