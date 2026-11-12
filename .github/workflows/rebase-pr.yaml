@@ -14,13 +14,20 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
+permissions: {}
+
 jobs:
   rebase-pr:
     name: Rebase pull request
     runs-on: ubuntu-latest
+    # Reads the target branch, retargets the PR and comments on it.
+    permissions:
+      contents: read
+      issues: write
+      pull-requests: write
     steps:
       - name: Perform rebase
-        uses: actions/github-script@v8
+        uses: actions/github-script@v8.0.0
         with:
           script: |
             const targetBranch = "develop";
