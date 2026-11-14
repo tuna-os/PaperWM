@@ -26,7 +26,7 @@ export default class PaperWMPrefs extends ExtensionPreferences {
 
         let selectedWorkspace = null;
         try {
-            const tempFile = Gio.File.new_for_path(GLib.get_tmp_dir()).get_child('paperwm.workspace');
+            const tempFile = Gio.File.new_for_path(GLib.get_user_runtime_dir()).get_child('paperwm.workspace');
             let [, contents] = tempFile.load_contents(null);
             const decoder = new TextDecoder('utf-8');
             const contentsString = decoder.decode(contents);
