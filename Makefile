@@ -95,6 +95,10 @@ schemas/gschemas.compiled: $(GSCHEMA_FILES)
 	@$(call rich_echo,"MAKE","$@")
 	@$(MAKE) -C schemas gschemas.compiled
 
-.PHONY: install uninstall release
+## Run the fast structural checks CI runs (metadata, schema, release archive)
+check:
+	@node scripts/check.mjs
+
+.PHONY: install uninstall release check
 
 include lib.mk

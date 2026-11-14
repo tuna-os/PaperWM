@@ -49,3 +49,11 @@ If it's not clear who will make a decision, it's the current maintainer's decisi
 [@smichel17]: https://github.com/smichel17
 [@jtaala]: https://github.com/jtaala
 [@thesola10]: https://github.com/thesola10
+
+## Checks
+
+Run `make check` before sending a PR. It validates `metadata.json`, compiles the
+GSettings schema, builds the release archive with `make release`, and fails if the
+archive lacks a runtime file, carries a development-only file, or the run leaves
+the working tree changed. It needs Node.js, `glib-compile-schemas`, `zip` and
+`unzip`, and no graphical session. Unit tests run with `node --test tests/`.
