@@ -40,11 +40,13 @@ Clone the repo and check out the branch for the GNOME Shell version you're runni
 - 40-41 ([EOL](https://release.gnome.org/calendar/#releases)): https://github.com/paperwm/PaperWM/tree/gnome-40
 - 3.28-3.38 ([EOL](https://release.gnome.org/calendar/#releases)): https://github.com/paperwm/PaperWM/tree/gnome-3.38
 
-then run the [`make install`](https://github.com/paperwm/PaperWM/blob/release/install.sh) 
-from the repository. The installer will create a link to the repo in
-`~/.local/share/gnome-shell/extensions`. It will then ask if you want to enable PaperWM.
+then run `make install` from the repository (see the `install` target in the
+[`Makefile`](Makefile)). It compiles the settings schema (this needs
+`glib-compile-schemas`, from your distribution's GLib tools) and creates a link
+to the repo in `~/.local/share/gnome-shell/extensions`. It does not enable
+PaperWM; see below.
 ```bash
-make install # install, load and enable paperwm
+make install # link the repo into ~/.local/share/gnome-shell/extensions
 ```
 
 Running the extension will automatically install a user config file as described in [User configuration & development](#user-configuration--development).
@@ -56,7 +58,7 @@ Running the extension will automatically install a user config file as described
 > `/usr/bin/gnome-extensions enable paperwm@paperwm.github.com`
 >
 
-> if you have run into issues, delete any older `paperwm@...` symlinks from `~/.local/share/gnome-shell/extensions` and re-run the `install.sh` script.
+> if you have run into issues, delete any older `paperwm@...` symlinks from `~/.local/share/gnome-shell/extensions` and re-run `make install`. It refuses to install while a non-symlinked copy of PaperWM (for example one installed from extensions.gnome.org) is present at `~/.local/share/gnome-shell/extensions/paperwm@paperwm.github.com`; remove that copy first.
 
 #### Uninstall PaperWM (if installed via source)
 
