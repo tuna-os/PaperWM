@@ -516,7 +516,7 @@ export const WorkspaceMenu = GObject.registerClass(
             this._prefItem.connect('activate', () => {
                 this.menu.close(true);
                 let wi = workspaceManager.get_active_workspace_index();
-                let temp_file = Gio.File.new_for_path(GLib.get_tmp_dir()).get_child('paperwm.workspace');
+                let temp_file = Gio.File.new_for_path(GLib.get_user_runtime_dir()).get_child('paperwm.workspace');
                 temp_file.replace_contents(wi.toString(), null, false, Gio.FileCreateFlags.REPLACE_DESTINATION, null);
                 context.openPrefs();
             });
