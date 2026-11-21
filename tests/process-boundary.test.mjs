@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { readFileSync } from 'node:fs';
+import { readFileSync, readdirSync } from 'node:fs';
 
 // GNOME Shell loads extension.js in the shell process and prefs.js in a
 // separate GTK process, and each can load only its own libraries. The
@@ -66,4 +66,12 @@ test('modules the preferences window loads import no shell-process library', () 
 
 test('modules the shell loads import no GTK or prefs-only module', () => {
     assert.deepEqual(violations('extension.js', PREFS_ONLY), []);
+});
+
+// `make release` ships every top-level *.js (JS_FILES in the Makefile), so a
+// module that neither entry point imports is shipped and never loaded.
+test('every module the release archive ships is loaded by an entry point', () => {
+    const reached = new Set([...graphFrom('extension.js').keys(), ...graphFrom('prefs.js').keys()]);
+    const shipped = readdirSync(root).filter(f => f.endsWith('.js'));
+    assert.deepEqual(shipped.filter(f => !reached.has(f)), []);
 });
